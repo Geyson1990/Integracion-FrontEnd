@@ -1,0 +1,212 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>
+                            Entidades del Estado Peruano
+                        </span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        Mantenimiento de las entidades disponibles en toda la plataforma
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="btn-group" dropdown>
+                        <button dropdownToggle type="button" class="btn btn-outline-success dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-excel"></i>
+                            Operaciones en excel
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-excel-operations" *dropdownMenu>
+                            <a class="dropdown-item" id="ExportMatrixToExcel" (click)="exportMatrizToExcel()" href="javascript:;">
+                                <i class="fa fa-download"></i>
+                                Exportar Matriz
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <div class="kt-subheader__wrapper">
+                        <button *ngIf="'Pages.Catalog.DirectoryGovernment.Create' | permission" (click)="createItem()" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Crear Entidad del Estado Peruano
+                        </button>
+                    </div>
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="selecionaColumnas()"
+                            class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Seleccionar columnas
+                        </button>
+                    </div>
+                </div>               
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <form class="kt-form" autocomplete="new-password">
+                        <div>
+                            <div class="row align-items-center mb-4">
+                                <div class="col-xl-12">
+                                    <div class="form-group m-form__group align-items-center">
+                                        <div class="input-group">
+                                            <input [(ngModel)]="filterText" placeholder="Buscar..." name="filterText" autoFocus class="form-control m-input" type="text">
+                                            <span class="input-group-btn">
+                                                <button (click)="getData()" aria-label="Buscar" class="btn btn-primary"
+                                                    type="submit">
+                                                    <i class="flaticon-search-1"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <file-uploader header="Cargar información batch"
+                                        subtitle="Ud. puede seleccionar un archivo Excel (.xslx, .xlsl) con un tamaño máximo de 1.5MB y un máximo de 5 archivo."
+                                        [hideType]="true" [images]="true"
+                                (saveAttachment)="saveAttach($event)" [size]="size"></file-uploader>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row align-items-center">
+                        <!--<Primeng-TurboTable-Start>-->
+                        <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                            <p-table #dataTable sortMode="multiple" (onLazyLoad)="getData($event)" [value]="primengTableHelper.records" rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true" [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                                [resizableColumns]="primengTableHelper.resizableColumns" dataKey="id">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width: 130px" [hidden]="!(['Pages.Catalog.DirectoryGovernment.Edit', 'Pages.Catalog.DirectoryGovernment.Delete'] | permissionAny)">
+                                            Acciones
+                                        </th>
+                                        <th style="width: 250px" pSortableColumn="Name" *ngIf="checkName">
+                                            Nombre
+                                            <p-sortIcon field="Name"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="ShortName" *ngIf="checkShortName">
+                                            Nombre corto
+                                            <p-sortIcon field="ShortName"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 200px" pSortableColumn="Address" *ngIf="checkAddress">
+                                            Dirección
+                                            <p-sortIcon field="Address"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="PhoneNumber" *ngIf="checkPhoneNumber">
+                                            Teléfono
+                                            <p-sortIcon field="PhoneNumber"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 200px" pSortableColumn="Url" *ngIf="checkUrl">
+                                            Página Web
+                                            <p-sortIcon field="Url"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 200px" pSortableColumn="DirectoryGovernmentType.Name" *ngIf="checkTipo">
+                                            Tipo
+                                            <p-sortIcon field="DirectoryGovernmentType.Name"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 200px" pSortableColumn="DirectoryGovernmentSector.Name" *ngIf="checkSector">
+                                            Sector
+                                            <p-sortIcon field="DirectoryGovernmentSector.Name"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 130px" pSortableColumn="Enabled" *ngIf="checkHabilitado">
+                                            Habilitado
+                                            <p-sortIcon field="Enabled"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-record let-expanded="expanded">
+                                    <tr>
+                                        <td style="width: 130px" [hidden]="!(['Pages.Catalog.DirectoryGovernment.Edit', 'Pages.Catalog.DirectoryGovernment.Delete'] | permissionAny)">
+                                            <div class="btn-group dropdown" dropdown container="body">
+                                                <button dropdownToggle class="dropdown-toggle btn btn-sm btn-primary">
+                                                    <i class="fa fa-cog"></i><span class="caret"></span>
+                                                    Acciones
+                                                </button>
+                                                <ul class="dropdown-menu" *dropdownMenu>
+                                                    <li>
+                                                        <a href="javascript:;" *ngIf="'Pages.Catalog.DirectoryGovernment.Edit' | permission" (click)="editItem(record)">
+                                                            <div *ngIf="!_verificationEnabled">{{'Edit' | localize}}</div>
+                                                            <div *ngIf="_verificationEnabled">Visualizar</div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" *ngIf="'Pages.Catalog.DirectoryGovernment.Delete' | permission" (click)="deleteItem(record)">
+                                                            Eliminar
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td style="width: 250px" *ngIf="checkName">
+                                            <span class="ui-column-title">
+                                                Nombre
+                                            </span> {{record.name}}
+                                        </td>
+                                        <td style="width: 150px" *ngIf="checkShortName">
+                                            <span class="ui-column-title">
+                                                Nombre corto
+                                            </span> {{record.shortName}}
+                                        </td>
+                                        <td style="width: 200px" *ngIf="checkAddress">
+                                            <span class="ui-column-title">
+                                                Dirección
+                                            </span> {{record.address}}
+                                        </td>
+                                        <td style="width: 150px" *ngIf="checkPhoneNumber">
+                                            <span class="ui-column-title">
+                                                Teléfono
+                                            </span> {{record.phoneNumber}}
+                                        </td>
+                                        <td style="width: 200px" *ngIf="checkUrl">
+                                            <span class="ui-column-title">
+                                                Página Web
+                                            </span> {{record.url}}
+                                        </td>
+                                        <td style="width: 200px" *ngIf="checkTipo">
+                                            <span class="ui-column-title">
+                                                Tipo
+                                            </span> {{record.directoryGovernmentType ? record.directoryGovernmentType.name : ''}}
+                                        </td>
+                                        <td style="width: 200px" *ngIf="checkSector">
+                                            <span class="ui-column-title">
+                                                Sector
+                                            </span> {{record.directoryGovernmentSector ? record.directoryGovernmentSector.name : ''}}
+                                        </td>
+                                        <td style="width: 130px" *ngIf="checkHabilitado">
+                                            <span class="ui-column-title">
+                                                Habilitado
+                                            </span>
+                                            <span class="kt-badge kt-badge--success kt-badge--inline" *ngIf="record.enabled">
+                                                Si
+                                            </span>
+                                            <span class="kt-badge kt-badge--dark kt-badge--inline" *ngIf="!record.enabled">
+                                                No
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                {{'NoData' | localize}}
+                            </div>
+                            <div class="primeng-paging-container">
+                                <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage" #paginator (onPageChange)="getData($event)" [totalRecords]="primengTableHelper.totalRecordsCount" [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                                </p-paginator>
+                                <span class="total-records-count">
+                                    {{'TotalRecordsCount' | localize:primengTableHelper.totalRecordsCount}}
+                                </span>
+                            </div>
+                        </div>
+                        <!--<Primeng-TurboTable-End>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <create-edit-directory-government #createEditModalDirectoryGovernment (modalSave)="getData()"></create-edit-directory-government>
+        <create-select-column-government #createEditModalColumnGovernment (modalSave)="getData()" (Enviar)="recibeValorName($event)"></create-select-column-government>
+    </div>
+
+</div>

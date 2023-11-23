@@ -1,0 +1,12 @@
+.space {
+    width: 4px;
+    height: auto;
+    display: inline-block;
+  }
+
+
+  #main {
+    padding-left: 20%;
+    width: 80%;
+    height: 100%;
+  }  

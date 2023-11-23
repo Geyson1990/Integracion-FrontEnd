@@ -1,0 +1,92 @@
+<div class="row mt-3">
+
+
+    <div class="col-12 mb-3">
+        <h5 class="d-block text-left text-dark font-weight-bold mt-4">
+            Recursos adjuntos desde la aplicación móvil mod
+        </h5>
+        <hr>
+    </div>
+
+    <div class="col-12" *ngIf="socialConflict?.resources?.length == 0">
+
+        <img aria-label="Empty Image Message" class="d-block mx-auto mt-4"
+            src="/assets/common/images/empty-content.png">
+
+        <label class="font-weight-bold h4 text-center d-block">
+            Aún no se ha agregado ningún archivo adjunto
+        </label>
+
+    </div>
+
+    <div class="col-12">
+
+
+        <div class="card flex justify-content-center">
+            <p-toolbar>
+                <div class="p-toolbar-group-end">
+
+                    <button class="btn btn-primary" (click)='enableAddFolder()'>
+                        <i class="fa fa-plus"></i>
+                        Crear Carpeta
+                    </button>
+                    <button class="btn btn-warning" (click)='openEdit()'>
+                        <i class="fa fa-edit"></i>
+                        Actualizar
+                    </button>
+                    <button class="btn btn-danger" (click)='deleteFile()'>
+                        <i class="fa fa-trash"></i>
+                        Eliminar
+                    </button>
+
+
+
+                </div>
+
+            </p-toolbar>
+
+            <div class="row mt-3 p-4" *ngIf='showAddFolder'>
+                <div class="col-md-3">
+                    <div class="mb-2 form-group">
+                        <label for="SocialConflictCodeInput" >
+                            Nombre Carpeta:
+                        </label>
+                        <div class="input-group">
+                            <input type='text' [(ngModel)]="nameFolder" id="nameFolder" name="nameFolder"
+                                class="form-control" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="mb-2 form-group">
+                        <label for="SocialConflictCodeInput" style="height: 19.5px;width: 230px;">
+                            &nbsp;
+                        </label>
+
+                        <button class="btn btn-primary" (click)='addFolder()'>
+                            <i class="fa fa-folder"></i>
+                            Agregar
+                        </button>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+            <p-tree class="w-full md:w-30rem" [value]="files" selectionMode="multiple" [(selection)]="selectedFiles"
+                [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"
+                (onNodeDrop)="eventDragAndDrop($event)"
+                ></p-tree>
+
+        </div>
+
+
+    </div>
+
+
+</div>

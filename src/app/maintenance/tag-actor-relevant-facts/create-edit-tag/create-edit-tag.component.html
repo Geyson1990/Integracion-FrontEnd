@@ -1,0 +1,33 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CreateOrEditTagModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #tagForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="new-password">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="!item.id">Crear Etiqueta</span>
+                        <span *ngIf="item.id">Editar Etiqueta</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+
+                <div class="modal-body row">
+                    <div class="form-group col-sm-12">
+                        <label for="Name">
+                                Nombre(*)
+                            </label>
+                        <input #tagName="ngModel" id="Name" [(ngModel)]="item.name" name="Name" class="form-control text-uppercase" type="text" required maxlength="255">
+                        <validation-messages [formCtrl]="tagName"></validation-messages>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button *ngIf="!_verificationEnabled " type="submit" [disabled]="!tagForm.form.valid" class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

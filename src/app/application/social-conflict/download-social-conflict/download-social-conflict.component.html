@@ -1,0 +1,142 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{ backdrop: 'static' }">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>
+                        Generar reporte: {{title}}
+                    </span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Cerrar">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="ActorType">
+                            Formato
+                        </label>
+    
+                        <select class="form-control" id="ActorType" name="ActorType" [(ngModel)]="data.format">
+                            <option value="-1">
+                                Seleccione
+                            </option>
+                            <option *ngIf="formats.pdf.enabled" [value]="formats.pdf.type">
+                                PDF (pdf)
+                            </option>
+                            <option *ngIf="formats.xlsx.enabled" [value]="formats.xlsx.type">
+                                EXCEL (xlsx)
+                            </option>
+                            <option *ngIf="formats.docx.enabled" [value]="formats.docx.type">
+                                WORD (docx)
+                            </option>
+                        </select>
+    
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <h5>Campos a mostrar en el reporte:</h5>
+                    </div>
+                    
+                </div>
+               
+
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label for="bolNameCase" class="kt-checkbox">
+                            <input id="bolNameCase" type="checkbox" name="bolNameCase"
+                            [(ngModel)]="data.bolNameCase" 
+                            >
+                            Nombre del caso
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="bolLocation" class="kt-checkbox">
+                            <input id="bolLocation" type="checkbox" name="bolLocation" [(ngModel)]="data.bolLocation" >
+                            Ubicación Geográfica
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="bolBackground" class="kt-checkbox">
+                            <input id="bolBackground" type="checkbox" name="bolBackground" [(ngModel)]="data.bolBackground">
+                            Antecedentes
+                            <span></span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-sm-4">
+                        <label for="bolDemand" class="kt-checkbox">
+                            <input id="bolDemand" type="checkbox" name="bolDemand" [(ngModel)]="data.bolDemand">
+                            Demanda
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="bolAccions" class="kt-checkbox">
+                            <input id="bolAccions" type="checkbox" name="ActiveFilter" [(ngModel)]="data.bolAccions">
+                            Acciones realizadas por la SGSD
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="bolCurrentSituation" class="kt-checkbox">
+                            <input id="bolCurrentSituation" type="checkbox" name="ActiveFilter"  [(ngModel)]="data.bolCurrentSituation">
+                            Situación Actual
+                            <span></span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-sm-4">
+                        <label for="bolRecommendations" class="kt-checkbox">
+                            <input id="bolRecommendations" type="checkbox" name="bolRecommendations" [(ngModel)]="data.bolRecommendations">
+                            Recomendaciones
+                            <span></span>
+                        </label>
+                    </div>
+    
+                    <div class="form-group col-sm-4">
+                        <label for="bolCommitments" class="kt-checkbox">
+                            <input id="bolCommitments" type="checkbox" name="bolCommitments" [(ngModel)]="data.bolCommitments">
+                            Compromisos
+                            <span></span>
+                        </label>
+                    </div>
+
+                </div>
+              
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-light-primary font-weight-bold"
+                    (click)="close()">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary font-weight-bold" [buttonBusy]="saving"
+                    busyText="Guardar..." (click)="save()">
+                    <i class="fa fa-download"></i>
+                    <span>
+                        Descargar
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

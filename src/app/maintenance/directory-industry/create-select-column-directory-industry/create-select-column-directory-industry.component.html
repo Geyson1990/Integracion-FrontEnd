@@ -1,0 +1,109 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="active">
+            <form #modalForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>
+                            Seleccionar Columnas
+                        </span>
+                    </h4>
+                </div>
+                <div class="modal-body row">
+                    
+                    <div class="form-group col-sm-10">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkTotal" name="checkTotal" binary="true" inputId="Total" (click)="selectTotal(t.checked)" #t></p-checkbox>
+                    </div>
+                    
+                    <div class="form-group col-sm-10">
+                        <label for="Name">
+                            Nombre Empresa
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkNameEmpresa" name="checkNameEmpresa" binary="true" inputId="NameEmpresa" (click)="selectRowNameEmpresa(a.checked)" #a></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Sector">
+                            Sector
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkSector" name="checkSector" binary="true" inputId="Sector" (click)="selectRowSector(b.checked)" #b></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Direccion">
+                            Direccion
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkDireccion" name="checkDireccion" binary="true" inputId="Direccion" (click)="selectRowDireccion(c.checked)" #c></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Telefono">
+                            Teléfono
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkTelefono" name="checkTelefono" binary="true" inputId="Telefono" (click)="selectRowTelefono(d.checked)" #d></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="PaginaWeb">
+                            Pagina Web
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkPaginaWeb" name="checkPaginaWeb" binary="true" inputId="PaginaWeb" (click)="selectRowPaginaWeb(e.checked)" #e></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Departamento">
+                            Departamento
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkDepartamento" name="checkDepartamento" binary="true" inputId="Departamento" (click)="selectRowDepartamento(f.checked)" #f></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Provincia">
+                            Provincia
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkProvincia" name="checkProvincia" binary="true" inputId="Provincia" (click)="selectRowProvincia(g.checked)" #g></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Distrito">
+                            Distrito
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkDistrito" name="checkDistrito" binary="true" inputId="Distrito" (click)="selectRowDistrito(h.checked)" #h></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Habilitado">
+                            Habilitado
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkHabilitado" name="checkHabilitado" binary="true" inputId="Habilitado" (click)="selectRowHabilitado(i.checked)" #i></p-checkbox>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold"
+                        (click)="close()">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary font-weight-bold" [buttonBusy]="saving" busyText="Aceptar..." (click)="save()">
+                        <i class="fa fa-save"></i>
+                        <span>
+                            Aceptar
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

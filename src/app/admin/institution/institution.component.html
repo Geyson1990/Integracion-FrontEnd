@@ -1,0 +1,82 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>Instituciones</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        Informacion de Instituciones
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="createInstitution()" *ngIf="'Pages.Administration.Institutions.Create' | permission" class="btn btn-primary"><i class="fa fa-plus">    
+                         </i> crear nueva Institución</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body">
+                    <div class="row align-items-center">
+                        <!--<Primeng-TurboTable-Start>-->
+                        <div class="col primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                            <p-table #dataTable (onLazyLoad)="getInstitutions()" [value]="primengTableHelper.records" rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true" [responsive]="primengTableHelper.isResponsive">
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width: 130px" [hidden]="!(['Pages.Administration.Institutions.Edit', 'Pages.Administration.Institutions.Delete'] | permissionAny)">
+                                            {{'Actions' | localize}}</th>
+                                        <th>{{'Name' | localize}}</th>
+                                        <th>{{'ShortName' | localize}}</th>
+                                        <th>{{'RUC' | localize}}</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-record="$implicit">
+                                    <tr>
+                                        <td [hidden]="!(['Pages.Administration.Institutions.Edit', 'Pages.Administration.Institutions.Delete'] | permissionAny)">
+                                            <div class="btn-group dropdown" dropdown>
+                                                <button dropdownToggle class="dropdown-toggle btn btn-primary btn-sm dropdown-toggle">
+                                                    <i class="fa fa-cog"></i><span class="caret"></span>
+                                                    {{"Actions" | localize}}
+                                                </button>
+                                                <ul class="dropdown-menu" *dropdownMenu>
+                                                    <li>
+                                                        <a href="javascript:;" *ngIf="'Pages.Administration.Institutions.Edit' | permission" (click)="createOrEditInstitutionModal.show(record.id)">
+                                                         {{'Edit' | localize}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" *ngIf="'Pages.Administration.Institutions.Delete' | permission" (click)="deleteInstitution(record)">{{'Delete' | localize}}</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="ui-column-title">{{'Name' | localize}}</span>
+                                            <span>
+                                                {{record.name}}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="ui-column-title">{{'shortName' | localize}}</span> {{record.shortName}}
+                                        </td>
+                                        <td>
+                                            <span class="ui-column-title">{{'RUC' | localize}}</span> {{record.ruc}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <createOrEditInstitutionModal #createOrEditInstitutionModal (modalSave)="getInstitutions()">
+        </createOrEditInstitutionModal>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        Reporte de Riesgo por Provincias
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                    <div class="mb-2 form-group">
+                        <form class="kt-form" autocomplete="new-password">
+                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                                <div class="mb-2 form-group mr-2">
+                                    <label for="ReportRiskProvince">
+                                        Fecha de consulta
+                                    </label>
+                                    <div class="input-group fix-border">
+                                        <input  name="ReportRiskProvince"
+                                            type="text" class="form-control" bsDatepicker
+                                            datePickerMomentModifier
+                                            [bsConfig]="{ adaptivePosition: true, customTodayClass: 'datepicker-today' }"
+                                            [(ngModel)]="dateRange[0]">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                        <div class="space">
+                                        </div>
+                                        <button class="btn btn-primary"  icon="fas fa-search" (click)="getData()" aria-label="Search">  
+                                             Buscar                                        
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div  *ngIf="this.data && charts.prospectivoProvincial.type == chartTypes.radar" [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body">
+                        <div class="tab-container">
+                            <h6 class="d-block text-center text-dark font-weight-bold text-accent-primary">
+                                Riesgo Prospectivo Provincial 
+                            </h6>
+                    
+                            <div class="chart-content" >
+                                <app-spinner *ngIf="busy"  class="d-block my-auto"></app-spinner>
+                                <p-chart (onDataSelect)="selectData($event)"  *ngIf="!busy"  type="radar" [data]="this.charts.prospectivoProvincial.radar" [options]="optionsRadarDefault">
+                                </p-chart>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div  *ngIf="this.detalle && charts.prospectivoProvincial.type == chartTypes.detailradar" [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <button  pButton icon="pi pi-arrow-left" class="button-primary mr-2"
+            data-toggle="tooltip" title="Regresar al gráfico anterior" (click)="retornarGraph()">
+            </button> 
+                        <h6 class="d-block text-center text-dark font-weight-bold text-accent-primary">
+                                Riesgo Prospectivo de la Provincia de {{this.provincia}} y sus variables
+                        </h6>    
+            <div class="kt-portlet kt-portlet--mobile">
+
+                    <div class="chart-content" >
+                        <app-spinner *ngIf="busy"  class="d-block my-auto"></app-spinner>
+                        <p-chart  *ngIf="!busy"  type="radar" [data]="this.charts.prospectivoProvincial.radardetail" [options]="optionsRadarDetailDefault">
+                        </p-chart>
+                    </div>
+            </div>
+        </div>
+    </div>
+

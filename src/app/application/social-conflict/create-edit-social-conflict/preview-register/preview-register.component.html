@@ -1,0 +1,84 @@
+<div [@routerTransition]>
+    <ng-container *ngIf="loaded">
+
+        <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+
+            <div class="kt-subheader kt-grid__item">
+                <div class="kt-container">
+                    <div class="kt-subheader__main">
+                        <button (click)="backButtonPressed()" type="button" class="btn btn-light back-button mt-2">
+                            {{backButtonText}}
+                        </button>
+                        <h3 class="kt-subheader__title">
+                            Bandeja de Casos de Conflictividad Social
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="kt-container kt-grid__item kt-grid__item--fluid">
+
+
+
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body">
+                        <div class="row mt-3">
+
+
+
+
+                            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label for="SocialConflictCodeInput">
+                                        Cual es el tipo de constitución del espacio de diálogo?
+                                    </label>
+                                    <div class="input-group">
+                                        <select id="typeSpaceDialog" [(ngModel)]="typeSpaceDialog" name="typeSpaceDialog" class="form-control" type="text">
+                                            <option value="-1">
+                                                Seleccione
+                                            </option>
+                                            <option value='1'>
+                                                Acta
+                                            </option>
+                                            <option value='2'>
+                                                Resolución ministerial
+                                            </option>
+                                            <option value='3'>
+                                                Resolución de secretaría
+                                            </option>
+
+                                            <option value='4'>
+                                                Decreto
+                                            </option>
+
+                                            <option value='5'>
+                                                Ninguno
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-3 text-right">
+                            <div class="col-sm-8 col-md-6 col-lg-6 col-xl-6">
+                                <button (click)='clickNext()' class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                    Siguiente
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

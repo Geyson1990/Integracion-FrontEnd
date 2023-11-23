@@ -1,0 +1,100 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}"> 
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="active">
+            <form #modalForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>
+                            Seleccionar Columnas
+                        </span>
+                    </h4>
+                </div>
+                <div class="modal-body row">
+                    <div class="form-group col-sm-10">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkTotal" name="checkTotal" binary="true" inputId="Total" (click)="selectTotal(t.checked)" #t></p-checkbox>
+                    </div>
+
+                    <div class="form-group col-sm-10">
+                        <label for="Code">
+                            Código 
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkCode" name="checkCode" binary="true" inputId="Code" (click)="selectCode(a.checked)" #a></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="DateIssue">
+                            Fecha de Emisión 
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkDateIssue" name="checkDateIssue" binary="true" inputId="DateIssue" (click)="selectDateIssue(b.checked)" #b></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="AlertName">
+                            Nombre de la alerta
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkAlertName" name="checkAlertName" binary="true" inputId="AlertName" (click)="selectAlertName(c.checked)" #c></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="UnderSecretary">
+                            Subsecretaría - Responsable - Región
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkUnderSecretary" name="checkUnderSecretary" binary="true" inputId="UnderSecretary" (click)="selectUnderSecretary(d.checked)" #d></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="MainInformation">
+                            Información Principal
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkMainInformation" name="checkMainInformation" binary="true" inputId="MainInformation" (click)="selectMainInformation(e.checked)" #e></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Actors">
+                            Actores
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkActors" name="checkActors" binary="true" inputId="Actors" (click)="selectActors(f.checked)" #f></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="LevelRisk">
+                           Nivel Riesgo
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkLevelRisk" name="checkLevelRisk" binary="true" inputId="LevelRisk" (click)="selectLevelRisk(g.checked)" #g></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Risk">
+                            Riesgo
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkRisk" name="checkRisk" binary="true" inputId="Risk" (click)="selectRisk(h.checked)" #h></p-checkbox>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold"
+                        (click)="close()">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary font-weight-bold" [buttonBusy]="saving" busyText="Aceptar..." (click)="save()">
+                        <i class="fa fa-save"></i>
+                        <span>
+                            Aceptar
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

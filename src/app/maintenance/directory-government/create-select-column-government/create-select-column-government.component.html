@@ -1,0 +1,102 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="active">
+            <form #modalForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>
+                            Seleccionar Columnas
+                        </span>
+                    </h4>
+                </div>
+                <div class="modal-body row">
+                  
+                    <div class="form-group col-sm-10">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkTotal" name="checkTotal" binary="true" inputId="Total" (click)="selectTotal(t.checked)" #t></p-checkbox>
+                    </div>
+
+                    <div class="form-group col-sm-10">
+                        <label for="Name">
+                            Nombre 
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkName" name="checkName" binary="true" inputId="Name" (click)="selectRowName(a.checked)" #a></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="ShortName">
+                            Nombre corto 
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkShortName" name="checkShortName" binary="true" inputId="ShortName" (click)="selectRowShortName(b.checked)" #b></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Address">
+                            Dirección 
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkAddress" name="checkAddress" binary="true" inputId="Address" (click)="selectRowAddress(c.checked)" #c></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="PhoneNumber">
+                            Teléfono
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkPhoneNumber" name="checkPhoneNumber" binary="true" inputId="PhoneNumber" (click)="selectRowPhoneNumber(d.checked)" #d></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Url">
+                            URL Página Web Trámite Documentario de la Entidad
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkUrl" name="checkUrl" binary="true" inputId="Url" (click)="selectRowUrl(e.checked)" #e></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Tipo">
+                            Tipo
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkTipo" name="checkTipo" binary="true" inputId="Tipo" (click)="selectRowTipo(f.checked)" #f></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Tipo">
+                            Sector
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkSector" name="checkSector" binary="true" inputId="Sector" (click)="selectRowSector(g.checked)" #g></p-checkbox>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <label for="Tipo">
+                            Habilitado
+                        </label>                        
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <p-checkbox [(ngModel)]="checkHabilitado" name="checkHabilitado" binary="true" inputId="Habilitado" (click)="selectRowHabilitado(h.checked)" #h></p-checkbox>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold"
+                        (click)="close()">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary font-weight-bold" [buttonBusy]="saving" busyText="Aceptar..." (click)="save()">
+                        <i class="fa fa-save"></i>
+                        <span>
+                            Aceptar
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

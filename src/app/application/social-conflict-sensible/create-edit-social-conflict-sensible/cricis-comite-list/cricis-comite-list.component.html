@@ -1,0 +1,59 @@
+<div class="row align-items-center mt-4 mx-0">
+    <!--<Primeng-TurboTable-Start>-->
+    <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+        <p-table #dataTable sortMode="multiple" [value]="socialConflictSensible.crisisCommittees" rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true" [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+            [resizableColumns]="primengTableHelper.resizableColumns">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 40px">
+
+                    </th>
+                    <th style="width: 100px">
+                        Fecha de Inicio
+                    </th>
+                    <th style="width: 100px">
+                        Fecha de Fin
+                    </th>
+                    <th style="width: 450px">
+                        Denominación del Comité de crisis
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-record="$implicit" let-rowIndex="rowIndex">
+                <tr [hidden]="record.isHidden">
+                    <td style="width: 40px">
+                        {{(rowIndex + 1) | number: '2.0-0'}}
+                    </td>
+                    <td style="width: 100px">
+                        <span class="ui-column-title">
+                            Código
+                        </span>{{record.CrisisComiteStartTime | momentFormat:'DD/MM/YYYY'}}
+                    </td>
+                    <td style="width: 100px">
+                        <span class="ui-column-title">
+                            Código
+                        </span>{{record.CrisisComiteEndTime | momentFormat:'DD/MM/YYYY'}}
+                    </td>
+                    <td style="width: 450px">
+                        <span class="ui-column-title">
+                            Denominación del Comite de Crisis
+                        </span>{{record.caseName}}
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+        <div class="primeng-no-data" *ngIf="socialConflictSensible.crisisCommittees.length == 0">
+            Aún no esta asociado a un Plan de Intervención
+        </div>
+        <div class="primeng-paging-container">
+            <p-paginator [rows]="primengTableHelper.defaultRecordsCountPerPage" #paginator (onPageChange)="getData($event)" [totalRecords]="socialConflictSensible.crisisCommittees.length" [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+            </p-paginator>
+            <span class="total-records-count">
+                
+            </span>
+        </div>
+    </div>
+    <!--<Primeng-TurboTable-End>-->
+</div>

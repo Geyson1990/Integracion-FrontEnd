@@ -1,0 +1,111 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditInstitutionModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #institutionForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="new-password">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="institution.id">Editar Institución</span>
+                        <span *ngIf="!institution.id">Crear Institución</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+
+                <div class="modal-body row">
+                    <div class="form-group col-sm-12">
+                        <label for="InstitutionDisplayName">
+                                Nombre(*)
+                            </label>
+                        <input #institutionName="ngModel" id="InstitutionDisplayName" [(ngModel)]="institution.name" name="institutionName" class="form-control text-uppercase" type="text" required maxlength="255">
+                        <validation-messages [formCtrl]="institutionName"></validation-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="ShortName">
+                                Nombre Corto(*)
+                            </label>
+                        <input #institutionShortName="ngModel" id="InstitutionshortName" [(ngModel)]="institution.shortName" name="InstitutionShortName" class="form-control text-uppercase" type="text" required maxlength="255">
+                        <validation-messages [formCtrl]="institutionShortName"></validation-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="InstitutioRuc">
+                                RUC(*)
+                            </label>
+                        <input #institutionRuc="ngModel" ngModel id="InstitutionDisplayName" [(ngModel)]="institution.ruc" name="InstitutionDisplayName" class="form-control text-uppercase" (keyup)="keyUpPhoneNumber($event)" (keypress)="keyPressPhoneNumber($event)" type="text"
+                            required maxlength="255">
+                        <validation-messages [formCtrl]="institutionRuc"></validation-messages>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="mb-2 form-group">
+                            <label for="sector">
+                                Sector
+                            </label>
+                            <div class="input-group">
+                                <select (change)="onSectorsChange($event)" id="Sectors" name="Sectors" [(ngModel)]="institution.sector.id" class="form-control">
+                                    <option  value="-1">
+                                        Seleccione
+                                    </option>
+                                    <option *ngFor="let sec of sectors"  [value]="sec.id">
+                                       {{sec.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 mb-4">
+                        <h5 class="d-block text-left text-dark font-weight-bold">
+                            Punto focal
+                        </h5>
+
+                        <hr>
+                    </div>
+                    <div class="form-group col-sm-8">
+                        <label for="institutionContacName">
+                                nombre y apellidos (*)
+                            </label>
+                        <input #institutionContacName="ngModel" id="institutionContacName" [(ngModel)]="institution.contacName" name="institutionContacName" class="form-control text-uppercase" type="text" required maxlength="255">
+                        <validation-messages [formCtrl]="institutionContacName"></validation-messages>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4 mb-2">
+                        <label for="InsitutionPhoneNumber">
+                            Número de teléfono
+                        </label>
+                        <input #institutionphoneNumber="ngModel" required id="InstitutionPhoneNumber" [(ngModel)]="institution.phoneNumber" name="InstitutionPhoneNumber" class="form-control" type="text" (keyup)="keyUpPhoneNumber($event)" (keypress)="keyPressPhoneNumber($event)"
+                            maxlength="255">
+                        <validation-messages [formCtrl]="institutionphoneNumber"></validation-messages>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-2">
+                        <label for="InsititutionEmailAddress">
+                            Correo electrónico
+                        </label>
+                        <input #institutionemailAddress="ngModel" required id="InstitutionEmailAddress" [(ngModel)]="institution.emailAddress" name="InstitutionEmailAddress" class="form-control" type="email" email required maxlength="255">
+                        <validation-messages [formCtrl]="institutionemailAddress"></validation-messages>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="Institutiontoken">
+                            tokent
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button aria-label="Buscar" type="button"  class="btn btn-primary" >
+                                <i class="flaticon-search-1"></i>
+                               </button>
+                            </span>
+                            <input id="ActorRuc" name="ActorRuc" class="form-control m-input" type="text" (keyup)="keyUpOnlyInteger($event)" (keypress)="keyPressOnlyNumbers($event)" minlength="11" maxlength="11">
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="submit" [disabled]="!institutionForm.form.valid" class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
